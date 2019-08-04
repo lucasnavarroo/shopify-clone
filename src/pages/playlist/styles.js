@@ -6,15 +6,17 @@ export const Container = styled.div`
   margin-top: 30px;
 
   ${Spinner} {
-    height:48px;
+    height: 48px;
   }
 
-  ${props => props.loading && css`
-    height:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-  `}
+  ${props =>
+    props.loading &&
+    css`
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    `}
 `;
 
 export const Header = styled.header`
@@ -66,41 +68,43 @@ export const Header = styled.header`
 `;
 
 export const SongList = styled.table`
-         width: 100%;
-         text-align: left;
-         margin-top: 20px;
+  width: 100%;
+  text-align: left;
+  margin-top: 20px;
 
-         thead th {
-           font-size: 11px;
-           color: #b3b3b3;
-           letter-spacing: 1.11px;
-           font-weight: normal;
-           text-transform: uppercase;
-           padding: 5px 10px;
+  thead th {
+    font-size: 11px;
+    color: #b3b3b3;
+    letter-spacing: 1.11px;
+    font-weight: normal;
+    text-transform: uppercase;
+    padding: 5px 10px;
 
-           &:last-child {
-             text-align: right;
-           }
-         }
+    &:last-child {
+      text-align: right;
+    }
+  }
+`;
 
-         tbody td {
-           border-top: 1px solid #282828;
-           font-size: 13px;
-           padding: 0 10px;
-           line-height: 40px;
-           color: #fff;
-           
-           &:first-child {
-             width: 80px;
-             text-align: right;
-           }
+export const SongItem = styled.tr`
+  td {
+    border-top: 1px solid #282828;
+    font-size: 13px;
+    padding: 0 10px;
+    line-height: 40px;
+    color: ${ props => (props.playing ? '#1ED760' : '#FFF') };
+    background: ${ props => (props.selected ?  '#282828' : 'transparent')};
 
-           &:last-child {
-             text-align: right;
-           }
-         }
+    &:first-child {
+      width: 80px;
+      text-align: right;
+    }
 
-         tbody tr:hover td {
-           background: #282828;
-         }
-       `;
+    &:last-child {
+      text-align: right;
+    }
+  }
+  &:hover td {
+    background: #282828;
+  }
+`;
