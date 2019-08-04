@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Sound from "react-sound";
 
 import { Container, Header, SongList, SongItem } from "./styles";
 import PropTypes from "prop-types";
@@ -38,7 +39,9 @@ class Playlist extends Component {
     loadSong: PropTypes.func.isRequired,
     currentSong: PropTypes.shape({
       id: PropTypes.number
-    }).isRequired
+    }).isRequired,
+    play: PropTypes.func.isRequired,
+    pause: PropTypes.func.isRequired
   };
 
   state = {
@@ -72,8 +75,27 @@ class Playlist extends Component {
             <span>PLAYLIST</span>
             <h1>{playlist.title}</h1>
             {!!playlist.songs && <p>{playlist.songs.length} músicas</p>}
-
-            <button>PLAY</button>
+            {!!this.props.currentSong &&
+            this.props.player.status === Sound.status.PLAYING ? (
+              <button
+                onClick={() => {
+                  if (playlist.songs) this.props.pause();
+                }}
+              >
+                PAUSE
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  if (playlist.songs) {
+                    this.props.loadSong(playlist.songs[0], playlist.songs);
+                    this.props.play();
+                  }
+                }}
+              >
+                PLAY
+              </button>
+            )}
           </div>
         </Header>
 
@@ -99,7 +121,9 @@ class Playlist extends Component {
                   onClick={() => {
                     this.setState({ selectedSong: song.id });
                   }}
-                  onDoubleClick={() => this.props.loadSong(song, playlist.songs)}
+                  onDoubleClick={() =>
+                    this.props.loadSong(song, playlist.songs)
+                  }
                   selected={this.state.selectedSong === song.id}
                   playing={
                     this.props.currentSong &&
@@ -135,7 +159,8 @@ class Playlist extends Component {
 
 const mapStateToProps = state => ({
   playlistDetails: state.playlistDetails,
-  currentSong: state.player.currentSong
+  currentSong: state.player.currentSong,
+  player: state.player
 });
 
 const mapDispatchToProps = dispatch =>

@@ -49,7 +49,7 @@ export default function player(state = INITIAL_STATE, action) {
           position: 0
         };
       }
-
+      
       return { ...state };
     }
     case Types.NEXT: {

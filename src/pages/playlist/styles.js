@@ -58,11 +58,12 @@ export const Header = styled.header`
       border-radius: 16px;
       color: #fff;
       line-height: 32px;
-      padding: 0 35px;
+      padding: 0 30px;
       border: 0;
       margin-top: 10px;
       font-size: 12px;
       letter-spacing: 1.11px;
+      max-width: 94px;
     }
   }
 `;
